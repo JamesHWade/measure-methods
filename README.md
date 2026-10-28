@@ -65,6 +65,22 @@ The example continues to import `program_solvent_use` from `measure_methods`.
 The combined distribution installs the service's Python
 dependencies; the calculation package itself uses only the standard library.
 
+## Upgrade an existing environment
+
+The historical and combined distributions use the same `measure_methods` import
+path. Remove the standalone distribution before force-reinstalling the combined
+one in the environment used by the service:
+
+```bash
+python -m pip uninstall -y measure-methods
+python -m pip install --force-reinstall "git+https://github.com/JamesHWade/measure-service.git"
+```
+
+A same-version install can be skipped by pip. Removing the old distribution
+after installing the combined wheel can also remove shared package files;
+force-reinstalling the combined distribution restores its files. Existing
+calculation records retain their original provenance through this change.
+
 ## Historical standalone installation
 
 The original standalone distribution remains installable from this repository:
