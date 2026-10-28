@@ -1,5 +1,15 @@
 # measure-methods
 
+Current development and delivery of the `measure_methods` Python package live in
+[`measure-service`](https://github.com/JamesHWade/measure-service). The service
+wheel includes the pure calculation package and its existing import interface.
+The calculation package remains independent of MCP, storage, and R.
+
+This repository retains the original standalone distribution and source history
+for historical installations and calculation provenance. New service evaluations
+identify the installed `measure-service` distribution; stored evaluations that
+identify `measure-methods` retain their original metadata.
+
 `measure-methods` is a small, dependency-free Python package for numerical
 kernels used in analytical method resource accounting. It owns the calculations;
 applications can own their input schemas, normalization, feasibility checks,
@@ -43,20 +53,34 @@ accumulated exactly before the final float conversion.
 This package does not convert units, normalize incomplete mixtures, decide whether
 a method is feasible, or persist results. Callers must convert quantities to canonical units before calculation.
 
-## Install the development version
+## Install the current package
 
-The initial implementation is in review and is not published on PyPI. With Git
-and Python 3.10 or later available:
+With Git and Python 3.10 or later available, install the service distribution:
 
 ```bash
-python -m pip install "git+https://github.com/JamesHWade/measure-methods.git@codex/linear-program-usage"
+python -m pip install "git+https://github.com/JamesHWade/measure-service.git"
 ```
 
-This follows the active branch HEAD. After the initial PR is merged, the temporary
-branch override can be removed. Installed source revisions can be recorded as
-calculation evidence without fixing future installations to a commit.
+The example continues to import `program_solvent_use` from `measure_methods`.
+The combined distribution installs the service's Python
+dependencies; the calculation package itself uses only the standard library.
 
-## Development
+## Historical standalone installation
+
+The original standalone distribution remains installable from this repository:
+
+```bash
+python -m pip install "git+https://github.com/JamesHWade/measure-methods.git"
+```
+
+These commands follow the respective default branches. Installed source revisions
+can be retained as calculation evidence without fixing future installations to a
+commit. A package move does not rewrite the provenance of a retained calculation.
+
+## Historical source checks
+
+New numerical changes and their reference tests belong in the service repository.
+To inspect or verify the standalone source retained here:
 
 ```bash
 python -m pip install -e '.[dev]'
